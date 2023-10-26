@@ -23,7 +23,7 @@ public class SearchFunction_StepDefinitions {
     }
 
     @When("user prints {string} in the search box")
-    public void user_prints_in_the_search_box(String product_name) {
+    public void user_prints_in_the_search_box(String product_name) throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(homePage.searchBar));
         homePage.searchBar.sendKeys(product_name);
     }
@@ -35,7 +35,8 @@ public class SearchFunction_StepDefinitions {
 
     @Then("user sees the result with {string}")
     public void user_sees_the_result_with(String product_name) {
-        Assert.assertTrue(Driver.getDriver().getTitle().equals("Amazon : " + product_name.toLowerCase()));
+        Assert.assertEquals(Driver.getDriver().getTitle(), "Amazon.com : " + product_name.toLowerCase());
+
         Driver.closeDriver();
     }
 }
